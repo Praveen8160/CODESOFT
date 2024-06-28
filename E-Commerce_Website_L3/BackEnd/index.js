@@ -18,7 +18,9 @@ DatabaseConnection(process.env.mongo);
 
 //Routers
 const userRouter = require("./Router/User.router.js");
+const productRouter = require("./Router/Product.router.js");
 app.use("/user", userRouter);
+app.use("/product", productRouter);
 
 app.listen(process.env.PORT || 8000, () =>
   console.log(`server running in http://localhost:${process.env.PORT}`)

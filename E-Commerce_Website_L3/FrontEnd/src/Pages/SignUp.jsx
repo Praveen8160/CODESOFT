@@ -1,9 +1,10 @@
 import React from "react";
 import logo from "../assets/logo.jpg";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useForm } from "react-hook-form";
 function SignUp() {
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -35,12 +36,16 @@ function SignUp() {
         }
       );
       const response = res.data;
-      console.log(response);
+      if (response.success) {
+        navigate("/");
+      } else {
+        alert("Fill all values");
+      }
     } catch (error) {}
   };
   return (
     <div className="min-h-[700px] flex items-center justify-center">
-      <div className="sm:flex bg-transparent shadow-2xl p-10 rounded-3xl ">
+      <div className="sm:flex bg-transparent shadow-2xl p-10 rounded-3xl my-7">
         <div className="sm:min-h-[500px] flex justify-center items-center">
           <img src={logo} className="sm:h-96 rounded-full" alt="" />
         </div>
@@ -101,9 +106,9 @@ function SignUp() {
                 className="w-100 mt-2 py-3 px-3 rounded-lg bg-white border border-gray-400 text-gray-800 font-semibold focus:border-orange-500 focus:outline-none"
                 {...register("password", {
                   required: true,
-                  maxLength: {
-                    value: 5,
-                    message: "Password length should be less than 5",
+                  minLength: {
+                    value: 6,
+                    message: "Password length should be more than 5",
                   },
                 })}
               />
@@ -123,7 +128,7 @@ function SignUp() {
                 // value={credentials.address}
                 placeholder="Address"
                 className="w-100 mt-2 py-3 px-3 rounded-lg bg-white border border-gray-400 text-gray-800 font-semibold focus:border-orange-500 focus:outline-none"
-                {...register("address", { required: "ENter your Address" })}
+                {...register("address", { required: "Enter your Address" })}
               />
               {errors.address && (
                 <p className="text-red-700">{errors.address.message}</p>

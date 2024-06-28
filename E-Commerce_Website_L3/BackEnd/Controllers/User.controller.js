@@ -10,13 +10,31 @@ const userRegisterhandler = async (req, res) => {
       mobile,
     });
     if (registerUser) {
-      return res.json({ succes: true });
+      return res.json({ success: true });
     } else {
       console.log("user not register");
     }
-  } catch (error) {}
+  } catch (error) {
+    console.log("error:", error);
+  }
+};
+
+const userLoginhandler = async (req, res) => {
+  const { email, password } = req.body;
+  const checkUser = await User.findOne({ email });
+  if (checkUser) {
+    const passwordcheck = await checkUser.checkpassword(password);
+    if (passwordcheck) {
+      return res.json({ success: true });
+    } else {
+      return res.json({ success: false });
+    }
+  } else {
+    return res.json({ success: false });
+  }
 };
 
 module.exports = {
   userRegisterhandler,
+  userLoginhandler,
 };
