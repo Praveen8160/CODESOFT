@@ -14,6 +14,8 @@ import About from "./Pages/About.jsx";
 import SignIn from "./Pages/SignIn.jsx";
 import SignUp from "./Pages/SignUp.jsx";
 import Product from "./Pages/Product.jsx";
+import ProductView from "./Pages/ProductView.jsx";
+
 const rout = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<App></App>}>
@@ -24,6 +26,7 @@ const rout = createBrowserRouter(
       <Route path="/SignUp" element={<SignUp></SignUp>}></Route>
       <Route path="/products/:id" element={<Product></Product>}></Route>
       <Route path="/products" element={<Product></Product>}></Route>
+      <Route path="/product/:id" element={<ProductView></ProductView>}></Route>
     </Route>
   )
 );

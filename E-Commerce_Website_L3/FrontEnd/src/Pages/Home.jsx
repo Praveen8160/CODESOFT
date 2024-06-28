@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import Productcard from "../components/Productcard";
+import Categoriescard from "../components/Categoriescard";
 import axios from "axios";
 function Home() {
   const [categories, setCategories] = useState([]);
@@ -43,7 +43,7 @@ function Home() {
             filteritem.name.toLowerCase().includes(search.toLowerCase())
           )
           .map((category) => (
-            <Productcard key={category._id} product={category} />
+            <Categoriescard key={category._id} product={category} />
           ))}
       </div>
     </div>
