@@ -1,4 +1,5 @@
 const User = require("../models/User.model.js");
+const { setUserToken } = require("../Service/authentication.js");
 const userRegisterhandler = async (req, res) => {
   try {
     const { fullname, email, password, address, mobile } = req.body;
@@ -25,6 +26,12 @@ const userLoginhandler = async (req, res) => {
   if (checkUser) {
     const passwordcheck = await checkUser.checkpassword(password);
     if (passwordcheck) {
+      const usertoken = setUserToken(checkUser);
+      res.cookie("token", usertoken, {
+        httpOnly: true,
+        secure: true,
+        sameSite: "None",
+      });
       return res.json({ success: true });
     } else {
       return res.json({ success: false });

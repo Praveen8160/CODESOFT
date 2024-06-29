@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import logo from "../assets/logo.jpg";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 function SignIn() {
   const navigate = useNavigate();
   const [credentials, setcredentials] = useState({
@@ -28,10 +30,10 @@ function SignIn() {
       if (response.success) {
         navigate("/");
       } else {
-        alert("Enter valid credentials");
+        toast.error("Enter valid credentials");
       }
     } catch (error) {
-      alert("try again");
+      toast.error("try again");
     }
   };
   const onchange = (e) => {
@@ -41,6 +43,7 @@ function SignIn() {
   return (
     <div className="min-h-[700px] flex items-center justify-center">
       <div className="sm:flex bg-transparent shadow-2xl p-10 rounded-3xl ">
+        <ToastContainer />
         <div className="sm:min-h-[500px] flex justify-center items-center">
           <img src={logo} className="sm:h-96 rounded-full" alt="" />
         </div>

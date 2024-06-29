@@ -20,7 +20,7 @@ function ProductView() {
         <img
           src={product.image}
           alt=""
-          className="object-fill mt-7 rounded-2xl"
+          className="object-fill mt-7 max-h-96 rounded-2xl"
         />
         <h1 className="font-bold text-3xl my-5">{product.title}</h1>
       </div>
