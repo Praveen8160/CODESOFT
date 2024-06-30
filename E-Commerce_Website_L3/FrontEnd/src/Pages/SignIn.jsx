@@ -20,6 +20,7 @@ function SignIn() {
           email: credentials.email,
           password: credentials.password,
         },
+        { withCredentials: true },
         {
           headers: {
             "Content-Type": "application/json",
