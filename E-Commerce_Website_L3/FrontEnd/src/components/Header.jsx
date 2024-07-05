@@ -1,23 +1,50 @@
 import React, { useEffect, useState } from "react";
 import logo from "../assets/logo.jpg";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import axios from "axios";
+import { useSelector, useDispatch } from "react-redux";
+import { login, logout } from "../store/Authaction.js";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 function Header() {
-  const [isauth, setisauth] = useState(false);
-  const checkauth = async () => {
-    try {
-      const res = await axios.get("http://localhost:4000/Authentication/auth", {
-        withCredentials: true,
-      });
-      const response = res.data;
-      response.success && isauth(true);
-    } catch (error) {}
+  const dispatch = useDispatch();
+  const { isAuthenticated } = useSelector((state) => state.auth);
+  // const [isauth, setisauth] = useState(false);
+  // const navigate = useNavigate();
+
+  // const checkauth = async () => {
+  //   try {
+  //     const res = await axios.get("http://localhost:4000/Authentication/auth", {
+  //       withCredentials: true,
+  //     });
+  //     const response = res.data;
+  //     console.log(response.success);
+  //     response.success && setisauth(true);
+  //   } catch (error) {}
+  // };
+  const Logout = async () => {
+    // try {
+    //   const res = await axios.get(
+    //     "http://localhost:4000/Authentication/logout",
+    //     {
+    //       withCredentials: true,
+    //     }
+    //   );
+    //   const response = res.data;
+    //   response.success
+    //     ? (toast.success(" Successfully Logout"),
+    //       setisauth(false),
+    //       navigate("/SignUp"))
+    //     : toast.info("Try Again!");
+    // } catch (error) {}
+    console.log(isAuthenticated);
+    dispatch(logout());
+    console.log(isAuthenticated);
   };
   useEffect(() => {
-    checkauth();
-  }, []);
+    // checkauth();
+    dispatch(login());
+  }, [dispatch]);
   return (
     <header className="shadow sticky z-50 top-0">
       <nav className="bg-white border-gray-200 px-4 lg:px-6 py-2.5">
@@ -27,7 +54,7 @@ function Header() {
             <img src={logo} className="mr-3 h-16" alt="Logo" />
           </Link>
           <div className="flex items-center lg:order-2">
-            {isauth ? (
+            {isAuthenticated === false ? (
               <>
                 <Link
                   to="/SignIn"
@@ -45,15 +72,15 @@ function Header() {
             ) : (
               <>
                 <Link
-                  to="SignUp"
                   className="text-gray-800 hover:bg-gray-50 focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 focus:outline-none"
+                  onClick={Logout}
                 >
                   Logout
                 </Link>
               </>
             )}
             <Link
-              to="#"
+              to="/cart"
               className="text-white bg-orange-700 hover:bg-orange-800 focus:ring-4 focus:ring-orange-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 focus:outline-none"
             >
               Cart
