@@ -21,10 +21,11 @@ DatabaseConnection(process.env.mongo);
 const userRouter = require("./Router/User.router.js");
 const productRouter = require("./Router/Product.router.js");
 const authRouter = require("./Router/Authentication.router.js");
+const paymentRouter = require("./Router/Razorpay.router.js");
 app.use("/user", userRouter);
 app.use("/product", productRouter);
 app.use("/Authentication", authRouter);
-
+app.use("/payment", paymentRouter);
 app.listen(process.env.PORT || 8000, () =>
   console.log(`server running in http://localhost:${process.env.PORT}`)
 );
