@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-
+import axios from "axios";
 function Cart() {
   const [cart, setcart] = useState([]);
   useEffect(() => {
@@ -19,9 +19,10 @@ function Cart() {
     try {
       const {
         data: { key },
-      } = await axios.get("http://localhost:5000/Order/rozarpayKey");
+      } = await axios.get("http://localhost:4000/payment/rozarpayKey");
+      // console.log(key);
       const paymentresponse = await axios.post(
-        "http://localhost:5000/Order/payment",
+        "http://localhost:4000/payment/razorpayPayment",
         {
           amount: totalprice,
         },
@@ -41,7 +42,7 @@ function Cart() {
         description: "Total payment",
         image: "https://example.com/your_logo",
         order_id: res.order.id, //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
-        callback_url: "http://localhost:5000/Order/paymentverify",
+        callback_url: "http://localhost:4000/payment/paymentverify",
         prefill: {
           name: "Gaurav Kumar",
           email: "gaurav.kumar@example.com",
@@ -71,10 +72,10 @@ function Cart() {
             );
             const respo = re.data;
             if (respo.success) {
-              localStorage.removeItem("cart");
+              localStorage.removeItem("Products");
               setcart([]);
-              setcount(0);
-              navigate("/Myorder");
+              // setcount(0);
+              navigate("/");
             }
           } catch (error) {
             console.log("error");

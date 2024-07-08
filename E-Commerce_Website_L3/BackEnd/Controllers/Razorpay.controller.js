@@ -36,7 +36,7 @@ const paymentverifyhandler = async (req, res) => {
     console.log("error", error);
   }
 };
-const rozarpayKeyhandler = () => {
+const rozarpayKeyhandler = (req, res) => {
   res.json({ key: process.env.Razorpay_KEY_ID });
 };
 module.exports = {

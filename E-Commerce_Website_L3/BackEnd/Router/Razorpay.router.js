@@ -5,7 +5,7 @@ const {
   paymentverifyhandler,
   rozarpayKeyhandler,
 } = require("../Controllers/Razorpay.controller.js");
-Router.post("/payment", paymenthandler);
+Router.post("/razorpayPayment", paymenthandler);
 Router.post("/paymentverify", paymentverifyhandler);
 Router.get("/rozarpayKey", rozarpayKeyhandler);
 module.exports = Router;
