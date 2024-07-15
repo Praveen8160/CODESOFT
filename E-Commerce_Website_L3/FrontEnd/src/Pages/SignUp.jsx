@@ -37,7 +37,7 @@ function SignUp() {
       );
       const response = res.data;
       if (response.success) {
-        navigate("/");
+        navigate("/SignIn");
       } else {
         alert("Fill all values");
       }

@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import logo from "../assets/logo.jpg";
 import { Link, NavLink, useNavigate } from "react-router-dom";
-import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
 import { login, logout } from "../store/Authaction.js";
 import { ToastContainer, toast } from "react-toastify";
@@ -9,37 +8,10 @@ import "react-toastify/dist/ReactToastify.css";
 function Header() {
   const dispatch = useDispatch();
   const { isAuthenticated } = useSelector((state) => state.auth);
-  // const [isauth, setisauth] = useState(false);
-  // const navigate = useNavigate();
-
-  // const checkauth = async () => {
-  //   try {
-  //     const res = await axios.get("http://localhost:4000/Authentication/auth", {
-  //       withCredentials: true,
-  //     });
-  //     const response = res.data;
-  //     console.log(response.success);
-  //     response.success && setisauth(true);
-  //   } catch (error) {}
-  // };
   const Logout = async () => {
-    // try {
-    //   const res = await axios.get(
-    //     "http://localhost:4000/Authentication/logout",
-    //     {
-    //       withCredentials: true,
-    //     }
-    //   );
-    //   const response = res.data;
-    //   response.success
-    //     ? (toast.success(" Successfully Logout"),
-    //       setisauth(false),
-    //       navigate("/SignUp"))
-    //     : toast.info("Try Again!");
-    // } catch (error) {}
-    console.log(isAuthenticated);
+    // console.log(isAuthenticated);
     dispatch(logout());
-    console.log(isAuthenticated);
+    // console.log(isAuthenticated);
   };
   useEffect(() => {
     // checkauth();
@@ -63,7 +35,7 @@ function Header() {
                   Sign in
                 </Link>
                 <Link
-                  to="SignUp"
+                  to="/SignUp"
                   className="text-gray-800 hover:bg-gray-50 focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 focus:outline-none"
                 >
                   Sign Up
@@ -117,14 +89,14 @@ function Header() {
               </li>
               <li>
                 <NavLink
-                  to="/About"
+                  to="/myOrder"
                   className={({ isActive }) =>
                     `block py-2 pr-4 pl-3 duration-200 ${
                       isActive ? "text-orange-700" : "text-gray-700"
                     } border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 hover:text-orange-700 lg:p-0`
                   }
                 >
-                  About
+                  Order
                 </NavLink>
               </li>
               <li>

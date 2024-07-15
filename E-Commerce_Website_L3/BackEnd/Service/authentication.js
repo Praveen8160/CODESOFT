@@ -5,6 +5,7 @@ const setUserToken = (user) => {
       id: user._id,
       name: user.fullname,
       email: user.email,
+      address: user.address,
     },
     process.env.TOKEN_SECRET,
     {

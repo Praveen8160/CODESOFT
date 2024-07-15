@@ -14,7 +14,7 @@ function Contact() {
                 Fill in the form to start a conversation
               </p>
 
-              <div className="flex items-center mt-8 text-gray-600">
+              {/* <div className="flex items-center mt-8 text-gray-600">
                 <svg
                   fill="none"
                   stroke="currentColor"
@@ -84,7 +84,7 @@ function Contact() {
                 <div className="ml-4 text-md tracking-wide font-semibold w-40">
                   onlineshopping@gmail.com
                 </div>
-              </div>
+              </div>*/}
             </div>
 
             <form className="p-6 flex flex-col justify-center">
