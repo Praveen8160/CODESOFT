@@ -5,6 +5,10 @@ const orderschema = mongoose.Schema(
       type: String,
       required: true,
     },
+    image: {
+      type: String,
+      required: true,
+    },
     productId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Product",
@@ -25,10 +29,10 @@ const orderschema = mongoose.Schema(
       type: String,
       required: true,
     },
-    // oderDate: {
-    //   type: Date,
-    //   required: true,
-    // },
+    orderDate: {
+      type: String,
+      required: true,
+    },
   },
   { timestamps: true }
 );

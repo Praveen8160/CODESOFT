@@ -23,8 +23,8 @@ function Footer() {
                   </Link>
                 </li>
                 <li className="mb-4">
-                  <Link to="/about" className="hover:underline">
-                    About
+                  <Link to="/Products" className="hover:underline">
+                    Product
                   </Link>
                 </li>
                 <li>
@@ -79,7 +79,7 @@ function Footer() {
             </Link>
             . All Rights Reserved.
           </span>
-          {/* <div className="flex mt-4 space-x-5 sm:justify-center sm:mt-0">
+          <div className="flex mt-4 space-x-5 sm:justify-center sm:mt-0">
             <Link to="#" className="text-gray-500 hover:text-gray-900">
               <svg
                 className="w-4 h-4"
@@ -129,8 +129,8 @@ function Footer() {
                 />
               </svg>
               <span className="sr-only">Dribbble account</span>
-            </Link> */}
-          {/* </div> */}
+            </Link>
+          </div>
         </div>
       </div>
     </footer>

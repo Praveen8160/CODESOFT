@@ -48,7 +48,7 @@ function SignIn() {
   return (
     <div className="min-h-[700px] flex items-center justify-center">
       <div className="sm:flex bg-transparent shadow-2xl p-10 rounded-3xl ">
-        <ToastContainer />
+        {/* <ToastContainer /> */}
         <div className="sm:min-h-[500px] flex justify-center items-center">
           <img src={logo} className="sm:h-96 rounded-full" alt="" />
         </div>

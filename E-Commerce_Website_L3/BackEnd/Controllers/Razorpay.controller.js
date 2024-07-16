@@ -9,11 +9,11 @@ const paymenthandler = async (req, res) => {
     };
     const order = await instance.orders.create(options);
 
-    console.log(order);
+    // console.log(order);
 
     res.json({ success: true, order });
   } catch (error) {
-    console.log("error", error);
+    return res.status(500).json({ error: error.message });
   }
 };
 const paymentverifyhandler = async (req, res) => {
@@ -33,7 +33,7 @@ const paymentverifyhandler = async (req, res) => {
       res.status(400).json({ success: false });
     }
   } catch (error) {
-    console.log("error", error);
+    return res.status(500).json({ error: error.message });
   }
 };
 const rozarpayKeyhandler = (req, res) => {

@@ -1,22 +1,29 @@
 import React, { useEffect, useState } from "react";
 import logo from "../assets/logo.jpg";
-import { Link, NavLink, useNavigate } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { login, logout } from "../store/Authaction.js";
-import { ToastContainer, toast } from "react-toastify";
+import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { MdMenu, MdClose } from "react-icons/md";
+
 function Header() {
   const dispatch = useDispatch();
   const { isAuthenticated } = useSelector((state) => state.auth);
-  const Logout = async () => {
-    // console.log(isAuthenticated);
-    dispatch(logout());
-    // console.log(isAuthenticated);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const handleToggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
   };
+
+  const Logout = async () => {
+    dispatch(logout());
+  };
+
   useEffect(() => {
-    // checkauth();
     dispatch(login());
   }, [dispatch]);
+
   return (
     <header className="shadow sticky z-50 top-0">
       <nav className="bg-white border-gray-200 px-4 lg:px-6 py-2.5">
@@ -30,13 +37,13 @@ function Header() {
               <>
                 <Link
                   to="/SignIn"
-                  className="text-gray-800 hover:bg-gray-50 focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 focus:outline-none"
+                  className="text-gray-800 hover:bg-gray-50 focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-2 lg:px-5 py-2 lg:py-2.5 mr-2 focus:outline-none"
                 >
                   Sign in
                 </Link>
                 <Link
                   to="/SignUp"
-                  className="text-gray-800 hover:bg-gray-50 focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 focus:outline-none"
+                  className="text-gray-800 hover:bg-gray-50 focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-2 lg:px-5 py-2 lg:py-2.5 mr-2 focus:outline-none"
                 >
                   Sign Up
                 </Link>
@@ -57,9 +64,21 @@ function Header() {
             >
               Cart
             </Link>
+            <button
+              type="button"
+              className="inline-flex items-center p-2 ml-1 text-sm text-gray-500 rounded-lg lg:hidden hover:bg-gray-100 focus:outline-none "
+              aria-controls="mobile-menu-2"
+              aria-expanded={isMenuOpen ? "true" : "false"}
+              onClick={handleToggleMenu}
+            >
+              <span className="sr-only">Toggle menu</span>
+              {isMenuOpen ? <MdClose size={25} /> : <MdMenu size={25}/>}
+            </button>
           </div>
           <div
-            className="hidden justify-between items-center w-full lg:flex lg:w-auto lg:order-1"
+            className={`${
+              isMenuOpen ? "block" : "hidden"
+            } justify-between items-center w-full lg:flex lg:w-auto lg:order-1`}
             id="mobile-menu-2"
           >
             <ul className="flex flex-col mt-4 font-medium lg:flex-row lg:space-x-8 lg:mt-0">

@@ -2,7 +2,7 @@ import React from "react";
 
 function Contact() {
   return (
-    <div className="relative flex items-top justify-center min-h-[700px] bg-white sm:items-center sm:pt-0">
+    <div className="relative flex items-top justify-center min-h-[700px] bg-gray-200 rounded-xl sm:items-center sm:pt-0">
       <div className="max-w-6xl mx-auto sm:px-6 lg:px-8">
         <div className="mt-8 overflow-hidden">
           <div className="grid grid-cols-1 md:grid-cols-2">
@@ -14,7 +14,7 @@ function Contact() {
                 Fill in the form to start a conversation
               </p>
 
-              {/* <div className="flex items-center mt-8 text-gray-600">
+              <div className="flex items-center mt-8 text-gray-600">
                 <svg
                   fill="none"
                   stroke="currentColor"
@@ -84,14 +84,12 @@ function Contact() {
                 <div className="ml-4 text-md tracking-wide font-semibold w-40">
                   onlineshopping@gmail.com
                 </div>
-              </div>*/}
+              </div>
             </div>
 
             <form className="p-6 flex flex-col justify-center">
               <div className="flex flex-col">
-                <label for="name" className="hidden">
-                  Full Name
-                </label>
+
                 <input
                   type="name"
                   name="name"
@@ -102,9 +100,7 @@ function Contact() {
               </div>
 
               <div className="flex flex-col mt-2">
-                <label for="email" className="hidden">
-                  Email
-                </label>
+             
                 <input
                   type="email"
                   name="email"
@@ -115,14 +111,12 @@ function Contact() {
               </div>
 
               <div className="flex flex-col mt-2">
-                <label for="tel" className="hidden">
-                  Number
-                </label>
+                
                 <input
                   type="tel"
                   name="tel"
                   id="tel"
-                  placeholder="Telephone Number"
+                  placeholder="Phone Number"
                   className="w-100 mt-2 py-3 px-3 rounded-lg bg-white border border-gray-400 text-gray-800 font-semibold focus:border-orange-500 focus:outline-none"
                 />
               </div>

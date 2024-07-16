@@ -1,17 +1,23 @@
 const order = require("../models/Order.model.js");
 const placeOrderhandler = async (req, res) => {
-  const orderdata = req.body.orderData;
+  const orderData = req.body.orderData;
   const orderDate = req.body.orderDate;
-  console.log(orderDate);
+  const customerId = req.users.id;
+  const customerAddress = req.users.address;
+  // console.log(orderDate);
+  // console.log(orderData);
   try {
-    await order.create({
-      productName: orderdata[0].pname,
-      productId: orderdata[0].id,
-      CustomerId: req.users.id,
-      price: parseFloat(orderdata[0].price),
-      description: orderdata[0].description,
-      address: req.users.address,
-    });
+    const orders = orderData.map((order) => ({
+      productName: order.pname,
+      productId: order.id,
+      image: order.img,
+      CustomerId: customerId,
+      price: parseFloat(order.price),
+      description: order.description,
+      address: customerAddress,
+      orderDate
+    }));
+    await order.insertMany(orders);
     return res.status(201).json({ success: true });
   } catch (error) {
     res.status(500).json({ success: false });

@@ -2,6 +2,7 @@ import React from "react";
 import logo from "../assets/logo.jpg";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
+import { ToastContainer, toast } from "react-toastify";
 import { useForm } from "react-hook-form";
 function SignUp() {
   const navigate = useNavigate();
@@ -38,6 +39,7 @@ function SignUp() {
       const response = res.data;
       if (response.success) {
         navigate("/SignIn");
+        toast.success("Now Login Your Account");
       } else {
         alert("Fill all values");
       }

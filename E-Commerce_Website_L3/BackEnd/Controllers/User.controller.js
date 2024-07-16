@@ -27,7 +27,7 @@ const userLoginhandler = async (req, res) => {
     const passwordcheck = await checkUser.checkpassword(password);
     if (passwordcheck) {
       const usertoken = setUserToken(checkUser);
-      console.log(usertoken)
+      // console.log(usertoken)
       res.cookie("token", usertoken, {
         httpOnly: true,
         secure: true, // Use secure cookies in production

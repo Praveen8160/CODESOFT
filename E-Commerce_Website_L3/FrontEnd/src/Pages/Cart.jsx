@@ -2,10 +2,12 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { useSelector } from "react-redux";
 
 function Cart() {
   const navigate = useNavigate();
   const [cart, setCart] = useState([]);
+  const { isAuthenticated } = useSelector((state) => state.auth);
 
   useEffect(() => {
     const value = JSON.parse(localStorage.getItem("Products"));
@@ -26,68 +28,73 @@ function Cart() {
 
   const handleCheckout = async (e) => {
     e.preventDefault();
-    try {
-      const {
-        data: { key },
-      } = await axios.get("http://localhost:4000/payment/rozarpayKey");
+    if (isAuthenticated === false) {
+      toast.warning("Login Your Account!");
+      navigate("/SignIn");
+    } else {
+      try {
+        const {
+          data: { key },
+        } = await axios.get("http://localhost:4000/payment/rozarpayKey");
 
-      const paymentResponse = await axios.post(
-        "http://localhost:4000/payment/razorpayPayment",
-        { amount: totalprice },
-        { headers: { "Content-Type": "application/json" } }
-      );
+        const paymentResponse = await axios.post(
+          "http://localhost:4000/payment/razorpayPayment",
+          { amount: totalprice },
+          { headers: { "Content-Type": "application/json" } }
+        );
 
-      const res = paymentResponse.data;
+        const res = paymentResponse.data;
 
-      const options = {
-        key,
-        amount: res.order.amount,
-        currency: "INR",
-        name: "Food Delivery",
-        description: "Total payment",
-        image: "https://example.com/your_logo",
-        order_id: res.order.id,
-        callback_url: "http://localhost:4000/payment/paymentverify",
-        prefill: {
-          name: "Gaurav Kumar",
-          email: "gaurav.kumar@example.com",
-          contact: "9000090000",
-        },
-        notes: {
-          address: "Razorpay Corporate Office",
-        },
-        theme: {
-          color: "#3399cc",
-        },
-        handler: async function (response) {
-          const productDetails = {
-            orderData: cart,
-            orderDate: Date.now(),
-          };
-          try {
-            const re = await axios.post(
-              "http://localhost:4000/order/placeOrder",
-              { ...response, ...productDetails },
-              { withCredentials: true }
-            );
-            const respo = re.data;
-            if (respo.success) {
-              localStorage.removeItem("Products");
-              setCart([]);
-              toast.success("Your order has been placed successfully!");
-              navigate("/contact");
+        const options = {
+          key,
+          amount: res.order.amount,
+          currency: "INR",
+          name: "Food Delivery",
+          description: "Total payment",
+          image: "https://example.com/your_logo",
+          order_id: res.order.id,
+          callback_url: "http://localhost:4000/payment/paymentverify",
+          prefill: {
+            name: "Gaurav Kumar",
+            email: "gaurav.kumar@example.com",
+            contact: "9000090000",
+          },
+          notes: {
+            address: "Razorpay Corporate Office",
+          },
+          theme: {
+            color: "#3399cc",
+          },
+          handler: async function (response) {
+            const productDetails = {
+              orderData: cart,
+              orderDate: new Date().toDateString(),
+            };
+            try {
+              const re = await axios.post(
+                "http://localhost:4000/order/placeOrder",
+                { ...response, ...productDetails },
+                { withCredentials: true }
+              );
+              const respo = re.data;
+              if (respo.success) {
+                localStorage.removeItem("Products");
+                setCart([]);
+                toast.success("Your order has been placed successfully!");
+                navigate("/contact");
+              }
+            } catch (error) {
+              toast.error("Failed to pla order");
             }
-          } catch (error) {
-            toast.error("Failed to pla order");
-          }
-        },
-      };
-      // console.log("Razorpay options:", options); // Log options for debugging
+          },
+        };
+        // console.log("Razorpay options:", options); // Log options for debugging
 
-      const rzp = new window.Razorpay(options);
-      rzp.open();
-    } catch (error) {
-      toast.error("Please Try Again");
+        const rzp = new window.Razorpay(options);
+        rzp.open();
+      } catch (error) {
+        toast.error("Please Try Again");
+      }
     }
   };
 
@@ -100,7 +107,7 @@ function Cart() {
               {cart.map((item, index) => (
                 <div
                   key={index}
-                  className="flex flex-col lg:flex-row items-center bg-gray-400 p-4 rounded-md"
+                  className="flex flex-col lg:flex-row items-center mb-2 bg-gray-400 p-4 rounded-md"
                 >
                   <div className="m-4">
                     <img
@@ -113,7 +120,7 @@ function Cart() {
                     <h1 className="text-lg font-semibold">{item.pname}</h1>
                     <p className="text-sm text-black">{item.description}</p>
                     <h3 className="text-lg font-semibold">
-                      Price: <span>${item.price}</span>
+                      Price: <span>₹{item.price}</span>
                     </h3>
                   </div>
                   <button

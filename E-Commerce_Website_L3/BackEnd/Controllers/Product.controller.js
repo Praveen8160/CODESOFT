@@ -20,23 +20,27 @@ const getAllProduct = async (req, res) => {
 
 const getSingleCategoryProduct = async (req, res) => {
   const id = req.params.id;
-  console.log(id);
+  // console.log(id);
   try {
     const cat = await Categories.findOne({ _id: id });
     const product = await Product.find({ category: cat.name });
     res.json({ success: true, product, category: cat.name });
-  } catch (error) {}
+  } catch (error) {
+    return res.status(500).json({ error: error.message });
+  }
 };
 
 const getSingleProduct = async (req, res) => {
   try {
     const product = await Product.findOne({ _id: req.params.id });
     return res.json({ product });
-  } catch (error) {}
+  } catch (error) {
+    return res.status(500).json({ error: error.message });
+  }
 };
 module.exports = {
   getAllProductCategory,
   getAllProduct,
   getSingleCategoryProduct,
-  getSingleProduct
+  getSingleProduct,
 };
