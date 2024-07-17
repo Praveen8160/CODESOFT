@@ -167,7 +167,7 @@ function Cart() {
             <img
               src="https://img.freepik.com/free-vector/man-shopping-supermarket_74855-7612.jpg?size=626&ext=jpg&ga=GA1.1.1719067875.1720498573&semt=ais_user"
               alt=""
-              className="h-72 rounded-full m-10"
+              className="lg:h-72 rounded-full lg:w-auto w-40 h-52 m-10"
             />
           </div>
           <div>
