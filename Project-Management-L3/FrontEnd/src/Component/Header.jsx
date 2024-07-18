@@ -4,7 +4,7 @@ import logo from "../assets/logo.jpeg";
 function Header() {
   return (
     <div>
-      <header className="bg-neutral-800 rounded-md">
+      <header className="bg-neutral-800 rounded-md sticky top-0 shadow ">
         <nav className="h-auto text-white flex flex-row justify-around items-center w-screen-2xl">
           <div className="m-2 lg:m-5 rounded-2xl">
             <Link>
