@@ -43,7 +43,9 @@ function SignUp() {
       } else {
         alert("Fill all values");
       }
-    } catch (error) {}
+    } catch (error) {
+      
+    }
   };
   return (
     <div className="min-h-[700px] flex items-center justify-center">
