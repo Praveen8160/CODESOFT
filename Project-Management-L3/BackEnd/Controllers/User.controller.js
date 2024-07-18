@@ -27,8 +27,7 @@ const handleUserSignin = async (req, res) => {
       const passwordcheck = await checkUser.checkpassword(password);
       if (passwordcheck) {
         const usertoken = setUserToken(checkUser);
-        // console.log(usertoken)
-        res.cookie("token", usertoken, {
+        res.cookie("usertoken", usertoken, {
           httpOnly: true,
           secure: true,
           sameSite: "None",

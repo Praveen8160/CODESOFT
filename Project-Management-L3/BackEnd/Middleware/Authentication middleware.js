@@ -11,7 +11,7 @@ function checkAUthenticationCookie(token) {
       req.users = userPayload;
       return next();
     } catch (error) {
-      console.error("Error decoding token:", error); 
+      console.error("Error decoding token:", error);
       return res.sendStatus(403);
     }
   };

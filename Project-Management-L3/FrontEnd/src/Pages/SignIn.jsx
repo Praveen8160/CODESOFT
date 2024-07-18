@@ -2,8 +2,12 @@ import React, { useState } from "react";
 import logo from "../assets/logo.jpeg";
 import { Link } from "react-router-dom";
 import axios from "axios";
-
+import { useDispatch } from "react-redux";
+import { login } from "../store/Authaction.js";
+import { useNavigate } from "react-router-dom";
 function SignIn() {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [credentials, setcredentials] = useState({
     email: "",
     password: "",
@@ -25,11 +29,13 @@ function SignIn() {
         }
       );
       if (response.status == 200) {
+        dispatch(login());
         alert("Successfully login ");
+        navigate("/");
       }
     } catch (error) {
-      if (error.response && error.response.status === 401) {
-        alert("invalid credentials");
+      if (error.response && error.response.status === 500) {
+        alert("try again");
       } else {
         alert("try again");
       }
@@ -46,13 +52,13 @@ function SignIn() {
           <img
             src="https://cdn.technologyadvice.com/wp-content/uploads/2019/05/How-Using-JIRA-For-Project-Management-Can-Make-Any-Team-More-Productive-01.png"
             alt=""
-                  className="lg:h-[50rem] h-72 md:h-[30rem] rounded-full"
+            className="lg:h-[50rem] h-72 md:h-[30rem] rounded-full"
           />
         </div>
         <div className="-mt-20 md:mt-9 lg:mt-2">
           <div className="flex flex-row items-center text-wrap invisible lg:visible md:visible">
             <img src={logo} alt="" />
-            <h1 className="text-4xl">Project Management Tool</h1>
+            <h1 className="text-4xl">Project Management</h1>
           </div>
           <div className="lg:ml-9 ml-4 lg:my-8">
             <h1 className="text-3xl">Login Your Account</h1>
@@ -63,7 +69,10 @@ function SignIn() {
               </Link>
             </p>
           </div>
-          <form className="flex flex-col lg:mt-20 lg:ml-9 mx-3" onSubmit={Login}>
+          <form
+            className="flex flex-col lg:mt-20 lg:ml-9 mx-3"
+            onSubmit={Login}
+          >
             <input
               type="email"
               name="email"

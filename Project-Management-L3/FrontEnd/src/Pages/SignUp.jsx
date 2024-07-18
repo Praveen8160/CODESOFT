@@ -56,7 +56,7 @@ function SignUp() {
         <div className="-mt-20 md:mt-9 lg:mt-2">
           <div className="flex flex-row items-center text-wrap invisible lg:visible md:visible">
             <img src={logo} alt="" />
-            <h1 className="text-4xl">Project Management Tool</h1>
+            <h1 className="text-4xl">Project Management</h1>
           </div>
           <div className="lg:ml-9 ml-4 lg:my-8">
             <h1 className="text-3xl">Register Your Account</h1>
