@@ -24,9 +24,11 @@ DatabaseConnection(process.env.mongo);
 const userRouter = require("./Router/User.Router.js");
 const authRouter = require("./Router/Authentication.router.js");
 const projectRouter = require("./Router/Project.Router.js");
+const taskRouter = require("./Router/Task.Router.js");
 app.use("/User", userRouter);
 app.use("/Authentication", authRouter);
 app.use("/Project", projectRouter);
+app.use("/Task", taskRouter);
 
 app.listen(port, () =>
   console.log(`server started on http://localhost:${port}`)

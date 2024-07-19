@@ -14,7 +14,7 @@ router.get("/auth", (req, res) => {
 });
 router.post("/logout", (req, res) => {
   try {
-    res.clearCookie("token");
+    res.clearCookie("usertoken");
     // const Token = req.cookies.token;
     // console.log(Token);
     res.json({ success: true });

@@ -8,6 +8,10 @@ const handelUserSignup = async (req, res) => {
     if (existingUser) {
       return res.status(400).json({ success: false });
     }
+    const existingUsername = await User.findOne({ username });
+    if (existingUsername) {
+      return res.status(400).json({ success: false });
+    }
     await User.create({
       username,
       email,
@@ -44,4 +48,13 @@ const handleUserSignin = async (req, res) => {
     return res.status(500).json({ success: false });
   }
 };
-module.exports = { handelUserSignup, handleUserSignin };
+const handlegetAllUser = async (req, res) => {
+  try {
+    const allUser = await User.find({}, "username");
+    // console.log("users", allUser);
+    res.status(200).json(allUser);
+  } catch (error) {
+    res.status(500).json({ success: false });
+  }
+};
+module.exports = { handelUserSignup, handleUserSignin, handlegetAllUser };

@@ -37,7 +37,7 @@ function SignUp() {
     } catch (error) {
       console.log(error.response);
       if (error.response && error.response.status === 400) {
-        alert("email aready in use");
+        alert("Enter unique email or username");
       } else {
         alert("Please try again.");
       }

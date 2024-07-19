@@ -19,6 +19,7 @@ function Header() {
 
   return (
     <div>
+      <ToastContainer />
       <header className="bg-neutral-800 rounded-md sticky top-0 shadow ">
         <nav className="h-auto text-white flex flex-row justify-around items-center w-screen-2xl">
           <div className="m-2 lg:m-5 rounded-2xl">
@@ -42,16 +43,6 @@ function Header() {
                 Dashboard
               </NavLink>
             </div>
-            <div>
-              <NavLink
-                to="/SignIn"
-                className={({ isActive }) =>
-                  `${isActive ? "text-gray-400" : "text-white"}`
-                }
-              >
-                Projects
-              </NavLink>
-            </div>
           </div>
           <div className="flex flex-row items-center">
             {isAuthenticated ? (
@@ -62,21 +53,11 @@ function Header() {
               </div>
             ) : (
               <>
-                <div className="hover:scale-110">
-                  <Link
-                    to="/SignIn"
-                    className="lg:mr-[2rem] lg:border-2 lg:py-2 lg:px-3 p-1 rounded-lg hover:border-gray-600 md:mr-[2rem] md:border-2 md:py-2 md:px-3"
-                  >
-                    Login
-                  </Link>
+                <div className="lg:mr-[2rem] md:mr-[2rem] mr-2 border-2 lg:py-2 lg:px-3 md:py-2 md:px-3 p-1 hover:scale-110 rounded-lg hover:border-gray-600">
+                  <Link to="/SignIn">Login</Link>
                 </div>
-                <div className="hover:scale-110">
-                  <Link
-                    to="/SignUp"
-                    className="lg:mr-[2rem] border-2 lg:py-2 lg:px-3 p-1 rounded-lg hover:border-gray-600"
-                  >
-                    Register
-                  </Link>
+                <div className="lg:mr-[2rem] md:mr-[2rem] border-2 lg:py-2 lg:px-3 md:py-2 md:px-3 p-1 hover:scale-110 rounded-lg hover:border-gray-600">
+                  <Link to="/SignUp">Register</Link>
                 </div>
               </>
             )}

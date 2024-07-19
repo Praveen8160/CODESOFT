@@ -38,7 +38,7 @@ const Modal = ({ onClose }) => {
   };
   const onChange = (e) => {
     const { name, value } = e.target;
-    setvalue((prevValue) => ({ ...prevValue, [name]: value }));
+    setvalue((prev) => ({ ...prev, [name]: value }));
   };
   return (
     <div className="fixed inset-0 bg-gray-800 bg-opacity-75 flex items-center justify-center z-50">

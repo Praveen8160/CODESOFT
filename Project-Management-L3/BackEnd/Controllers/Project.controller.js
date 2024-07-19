@@ -12,4 +12,32 @@ const handleAddProject = async (req, res) => {
     return res.status(500).json({ success: false });
   }
 };
-module.exports = { handleAddProject };
+
+const handleAllProjects = async (req, res) => {
+  try {
+    const Projects = await Project.find({ createdBy: req.users.id });
+    return res.status(200).json({ success: true, Projects });
+  } catch (error) {
+    return res.status(500).json({ success: false });
+  }
+};
+
+const handleSinglePoject = async (req, res) => {
+  try {
+    const singleProject = await Project.findOne({ _id: req.params.id })
+      .populate({
+        path: "tasks",
+        populate: {
+          path: "assignedTo",
+          model: "User",
+        },
+      })
+      .exec();
+    // console.log(singleProject);
+    res.status(200).json({ success: true, singleProject });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({ success: false });
+  }
+};
+module.exports = { handleAddProject, handleAllProjects, handleSinglePoject };

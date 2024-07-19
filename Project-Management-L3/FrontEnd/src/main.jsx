@@ -11,6 +11,7 @@ import {
 import DashBoard from "./Pages/DashBoard.jsx";
 import SignIn from "./Pages/SignIn.jsx";
 import SignUp from "./Pages/SignUp.jsx";
+import Project from "./Pages/Project.jsx";
 
 const rout = createBrowserRouter(
   createRoutesFromElements(
@@ -18,6 +19,7 @@ const rout = createBrowserRouter(
       <Route path="" element={<DashBoard></DashBoard>}></Route>
       <Route path="/SignIn" element={<SignIn></SignIn>}></Route>
       <Route path="/SignUp" element={<SignUp></SignUp>}></Route>
+      <Route path="project/:id" element={<Project></Project>}></Route>
     </Route>
   )
 );
