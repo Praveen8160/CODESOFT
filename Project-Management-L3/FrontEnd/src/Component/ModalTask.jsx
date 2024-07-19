@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { MdCancel, MdCleanHands } from "react-icons/md";
-import { toast,ToastContainer } from "react-toastify";
+import { toast, ToastContainer } from "react-toastify";
 function ModalTask({ onClose, pid }) {
   const [user, setuser] = useState([]);
   const [value, setvalue] = useState({
@@ -49,7 +49,7 @@ function ModalTask({ onClose, pid }) {
       if (error.response && error.response.status === 500) {
         alert("try again");
       } else {
-        talert("try again");
+        alert("try again");
       }
     }
   };

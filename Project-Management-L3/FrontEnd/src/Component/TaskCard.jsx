@@ -1,14 +1,41 @@
 import React, { useState } from "react";
 import { FaRegEdit } from "react-icons/fa";
 import { MdCancel } from "react-icons/md";
-function TaskCard({ task }) {
+import axios from "axios";
+import { toast } from "react-toastify";
+function TaskCard({ task, onUpdateStatus }) {
   const [edit, setedit] = useState(false);
   const [status, setstatus] = useState(task.status);
   const editstatus = () => {
     setedit(!edit);
   };
-  const updateStatus = (id) => {
-    
+  const updateStatus = async (id) => {
+    try {
+      const response = await axios.post(
+        "http://localhost:2020/Task/updateTaskStatus",
+        {
+          status,
+          id,
+        },
+        { withCredentials: true },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      if (response.status == 200) {
+        toast.success("Task Status Updated");
+        setedit(!edit);
+        onUpdateStatus(response.data.updatedtask);
+      }
+    } catch (error) {
+      if (error.response && error.response.status === 500) {
+        toast.error("try again");
+      } else {
+        toast.error("try again");
+      }
+    }
   };
   const handleStatusChange = (e) => {
     setstatus(e.target.value);
@@ -24,7 +51,7 @@ function TaskCard({ task }) {
             task.status
           ) : (
             <>
-              <select value={status} onChange={handleStatusChange}>
+              <select value={status} className="rounded-md bg-slate-400" onChange={handleStatusChange}>
                 <option value="pending">pending</option>
                 <option value="in-progress">in-progress</option>
                 <option value="completed">completed</option>

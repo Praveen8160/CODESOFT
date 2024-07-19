@@ -28,12 +28,25 @@ const handleGetAllTasks = async (req, res) => {
     const tasks = await Task.find({ assignedTo: req.users.id }).populate(
       "project"
     );
-    console.log(tasks);
+    // console.log(tasks);
     return res.status(200).json({ success: true, tasks });
   } catch (error) {
     return res.status(500).json({ success: false });
   }
 };
 
-const handleUpdateTaskStatus = async (req, res) => {};
+const handleUpdateTaskStatus = async (req, res) => {
+  try {
+    const data = req.body;
+    const updatedtask = await Task.findByIdAndUpdate(
+      { _id: data.id },
+      { status: data.status },
+      { new: true }
+    );
+    // console.log(updatedtask);
+    return res.status(200).json({ success: true, updatedtask });
+  } catch (error) {
+    return res.status(500).json({ success: false });
+  }
+};
 module.exports = { handleAddTask, handleGetAllTasks, handleUpdateTaskStatus };

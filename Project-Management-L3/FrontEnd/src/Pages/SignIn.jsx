@@ -1,11 +1,13 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import logo from "../assets/logo.jpeg";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { login } from "../store/Authaction.js";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 function SignIn() {
+  const { isAuthenticated } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [credentials, setcredentials] = useState({
@@ -45,6 +47,11 @@ function SignIn() {
     const { name, value } = e.target;
     setcredentials({ ...credentials, [name]: value });
   };
+  useEffect(() => {
+    if (isAuthenticated) {
+      navigate("/");
+    }
+  });
   return (
     <div className="flex flex-col">
       <div className="flex lg:flex-row flex-col items-center shadow-2xl w-auto lg:mt-10">
