@@ -3,6 +3,7 @@ const {
   handleAddProject,
   handleAllProjects,
   handleSinglePoject,
+  handleDeleteProject,
 } = require("../Controllers/Project.controller");
 const checkAUthenticationCookie = require("../Middleware/Authentication middleware");
 const Router = express.Router();
@@ -17,4 +18,5 @@ Router.get(
   handleAllProjects
 );
 Router.get("/getSingleProject/:id", handleSinglePoject);
+Router.delete("/deleteProject/:id", handleDeleteProject);
 module.exports = Router;

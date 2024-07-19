@@ -7,7 +7,9 @@ function App() {
   return (
     <Provider store={store}>
       <Header></Header>
-      <Outlet></Outlet>
+      <div className="mt-20">
+        <Outlet></Outlet>
+      </div>
     </Provider>
   );
 }

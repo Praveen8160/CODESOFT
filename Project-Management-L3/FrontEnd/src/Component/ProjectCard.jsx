@@ -1,6 +1,25 @@
+import axios from "axios";
 import React from "react";
 import { Link } from "react-router-dom";
-function ProjectCard({ project }) {
+import { toast } from "react-toastify";
+function ProjectCard({ project, onDelete }) {
+  const deleteproject = async (id) => {
+    try {
+      const response = await axios.delete(
+        `http://localhost:2020/Project/deleteProject/${id}`,
+        {
+          withCredentials: true,
+        }
+      );
+      if (response.status === 200) {
+        toast.success("Project deleted successfully");
+        onDelete(id);
+      }
+    } catch (error) {
+      // console.log(error);
+      toast.error("Failed to delete project");
+    }
+  };
   return (
     <>
       <div className="bg-slate-300 border-2 flex flex-col items-center border-gray-700 rounded-md mx-4 py-3 mb-7">
@@ -16,6 +35,7 @@ function ProjectCard({ project }) {
           <Link
             to="/"
             className="border-2 py-3 px-5 font-bold border-gray-700 rounded-md bg-red-500 hover:bg-red-700 hover:scale-105"
+            onClick={() => deleteproject(project._id)}
           >
             Delete
           </Link>

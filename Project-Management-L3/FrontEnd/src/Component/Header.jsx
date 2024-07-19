@@ -20,10 +20,10 @@ function Header() {
   return (
     <div>
       <ToastContainer />
-      <header className="bg-neutral-800 rounded-md sticky top-0 shadow ">
+      <header className="bg-neutral-800 fixed top-0 left-0 right-0 z-50 shadow">
         <nav className="h-auto text-white flex flex-row justify-around items-center w-screen-2xl">
           <div className="m-2 lg:m-5 rounded-2xl">
-            <Link>
+            <Link to="/">
               <img
                 src={logo}
                 className="lg:mr-3 h-12 rounded-xl"

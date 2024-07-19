@@ -41,8 +41,8 @@ function ModalTask({ onClose, pid }) {
           },
         }
       );
-      if (response.status == 200) {
-        alert("Task Assigned");
+      if (response.status === 201) {
+        alert("Task Assigned")
         setvalue({ pname: "", description: "", Assigned: "", deadline: "" });
       }
     } catch (error) {
@@ -59,7 +59,6 @@ function ModalTask({ onClose, pid }) {
   };
   useEffect(() => {
     getAllUser();
-    // console.log(pid);
   }, []);
   return (
     <div className="fixed inset-0 bg-gray-800 bg-opacity-75 flex items-center justify-center z-50">
